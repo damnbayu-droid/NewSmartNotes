@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -43,6 +43,7 @@ export function PDFTools() {
         }
         setIsProcessing(true);
         try {
+            const { PDFDocument } = await import('pdf-lib');
             const mergedPdf = await PDFDocument.create();
             for (const file of files) {
                 const arrayBuffer = await file.arrayBuffer();
@@ -72,6 +73,7 @@ export function PDFTools() {
 
         setIsProcessing(true);
         try {
+            const { PDFDocument } = await import('pdf-lib');
             const file = files[0];
             const arrayBuffer = await file.arrayBuffer();
             const srcPdf = await PDFDocument.load(arrayBuffer);
@@ -120,6 +122,7 @@ export function PDFTools() {
         }
         setIsProcessing(true);
         try {
+            const { PDFDocument } = await import('pdf-lib');
             const file = files[0];
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await PDFDocument.load(arrayBuffer);

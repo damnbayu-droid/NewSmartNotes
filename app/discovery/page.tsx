@@ -116,9 +116,9 @@ export default async function DiscoveryPage() {
             {processedNotes.map((note) => (
               <div 
                 key={note.id}
-                className="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 p-7 hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-2 transition-all duration-500 flex flex-col"
+                className="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 p-8 hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-2 transition-all duration-500 flex flex-col min-h-[440px]"
               >
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-8">
                   <div className="p-3 rounded-2xl bg-violet-50 dark:bg-violet-950/20 text-violet-600 dark:text-violet-400">
                     <Sparkles className="w-5 h-5" />
                   </div>
@@ -126,28 +126,22 @@ export default async function DiscoveryPage() {
                     <span className="px-3 py-1 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-[9px] uppercase font-black tracking-widest text-slate-500">
                       {note.category || 'General'}
                     </span>
-                    {note.ratingCount > 0 && (
-                      <div className="flex items-center gap-1.5 text-amber-500 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-lg border border-amber-100 dark:border-amber-500/20">
-                        <Star className="w-3 h-3 fill-amber-500" />
-                        <span className="text-[10px] font-black">{note.averageRating}</span>
-                      </div>
-                    )}
                   </div>
                 </div>
 
-                <div className="flex-1 space-y-3 mb-8">
-                  <h3 className="font-black text-slate-900 dark:text-white line-clamp-1 text-xl group-hover:text-violet-600 transition-colors tracking-tight">
+                <div className="flex-1 space-y-4 mb-4">
+                  <h3 className="font-black text-slate-900 dark:text-white line-clamp-2 text-xl group-hover:text-violet-600 transition-colors tracking-tight uppercase leading-tight">
                     {note.title || 'Untitled Dataset'}
                   </h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed font-medium">
-                    {note.content?.replace(/<[^>]*>?/gm, '').substring(0, 180)}...
+                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-4 leading-relaxed font-medium">
+                    {note.content?.replace(/<[^>]*>?/gm, '').substring(0, 200)}
                   </p>
                 </div>
 
-                <div className="space-y-6 pt-6 border-t border-slate-50 dark:border-slate-800">
+                <div className="space-y-6 pt-6 mt-auto border-t border-slate-50 dark:border-slate-800">
                   <div className="flex flex-wrap gap-2">
                     {note.tags?.slice(0, 2).map((tag: string) => (
-                      <span key={tag} className="text-[9px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 dark:bg-slate-800/50 px-2 py-1 rounded-lg">
+                      <span key={tag} className="text-[9px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 dark:bg-slate-800/50 px-2.5 py-1 rounded-lg">
                         #{tag}
                       </span>
                     ))}
@@ -160,7 +154,7 @@ export default async function DiscoveryPage() {
                     </div>
                     <Link 
                       href={`/s/${note.share_slug}`} 
-                      className="h-10 rounded-2xl bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-black uppercase text-[10px] tracking-widest px-6 flex items-center gap-2 hover:bg-violet-600 hover:text-white transition-all active:scale-95 shadow-lg shadow-slate-200 dark:shadow-none"
+                      className="h-11 rounded-2xl bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-black uppercase text-[10px] tracking-widest px-6 flex items-center gap-2 hover:bg-violet-600 hover:text-white transition-all active:scale-95 shadow-lg shadow-slate-200 dark:shadow-none"
                     >
                       Access <ArrowUpRight className="w-4 h-4" />
                     </Link>

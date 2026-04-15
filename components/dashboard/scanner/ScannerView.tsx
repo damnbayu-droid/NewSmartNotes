@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
+
 import { 
     X, 
     FileImage, 
@@ -19,7 +19,7 @@ import {
     Save
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import imageCompression from 'browser-image-compression';
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -56,6 +56,7 @@ export function ScannerView() {
                 fileType: 'image/jpeg'
             };
 
+            const { default: imageCompression } = await import('browser-image-compression');
             const compressedFile = await imageCompression(blob as File, options);
             const compressedUrl = URL.createObjectURL(compressedFile);
 
@@ -75,6 +76,7 @@ export function ScannerView() {
     };
 
     const generatePDF = async () => {
+        const { PDFDocument } = await import('pdf-lib');
         const pdfDoc = await PDFDocument.create();
         for (const imageSrc of capturedImages) {
             const jpgImageBytes = await fetch(imageSrc).then((res) => res.arrayBuffer());

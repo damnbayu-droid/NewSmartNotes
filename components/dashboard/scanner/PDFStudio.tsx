@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,7 +22,7 @@ import {
   Loader2
 } from 'lucide-react';
 // @ts-ignore - Fallback for CI/CD environment where ambient types may not be detected
-import SignatureCanvas from 'react-signature-canvas';
+
 import { Dialog as ShadDialog, DialogContent as ShadDialogContent, DialogHeader as ShadDialogHeader, DialogTitle as ShadDialogTitle, DialogTrigger as ShadDialogTrigger, DialogFooter as ShadDialogFooter } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
@@ -46,7 +46,7 @@ export function PDFStudio() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const sigCanvas = useRef<SignatureCanvas>(null);
+  const sigCanvas = useRef<any>(null);
   const [signatureData, setSignatureData] = useState<string | null>(null);
   const [isSignDialogOpen, setIsSignDialogOpen] = useState(false);
   
@@ -69,6 +69,7 @@ export function PDFStudio() {
 
   const detectFields = async (bytes: Uint8Array) => {
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(bytes);
       const form = pdfDoc.getForm();
       const fields = form.getFields();
@@ -105,6 +106,7 @@ export function PDFStudio() {
     if (!pdfBytes) return;
     setIsProcessing(true);
     try {
+      const { PDFDocument, rgb, StandardFonts } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(pdfBytes);
       const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
       const pages = pdfDoc.getPages();
@@ -284,6 +286,7 @@ export function PDFStudio() {
                                         <ShadDialogTitle className="text-xl font-black uppercase tracking-tighter">Sign Intelligence</ShadDialogTitle>
                                     </ShadDialogHeader>
                                     <div className="border border-slate-100 dark:border-slate-800 rounded-[2rem] overflow-hidden bg-white mt-6">
+                                        {/* @ts-ignore */}
                                         <SignatureCanvas 
                                             ref={sigCanvas} penColor='black' 
                                             canvasProps={{width: 400, height: 200, className: 'sigCanvas'}} 
