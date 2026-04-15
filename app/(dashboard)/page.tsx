@@ -1,22 +1,24 @@
 'use client'
 
 export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
 
 import { useState, useMemo, useEffect, Suspense } from 'react'
+import dynamicImport from 'next/dynamic'
 import { useAuth } from '@/hooks/useAuth'
 import { useNotes } from '@/hooks/useNotes'
 import { SearchBar } from '@/components/notes/SearchBar'
 import { NotesGrid } from '@/components/notes/NotesGrid'
-import { NoteEditor } from '@/components/notes/NoteEditor'
 import { GuestSyncModal } from '@/components/auth/GuestSyncModal'
 import { toast } from 'sonner'
 import type { Note, ViewMode, SortOption } from '@/types'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Book as BookIcon, Calendar, FileEdit } from 'lucide-react'
-import { BookLayout } from '@/components/dashboard/books/BookLayout'
-import { ScheduleView } from '@/components/dashboard/schedule/ScheduleView'
-import { ScannerView } from '@/components/dashboard/scanner/ScannerView'
+
+// Heavy Components - Dynamic Load to keep Worker under 3MB
+const NoteEditor = dynamicImport(() => import('@/components/notes/NoteEditor').then(m => m.NoteEditor), { ssr: false })
+const ScannerView = dynamicImport(() => import('@/components/dashboard/scanner/ScannerView').then(m => m.ScannerView), { ssr: false })
+const BookLayout = dynamicImport(() => import('@/components/dashboard/books/BookLayout').then(m => m.BookLayout), { ssr: false })
+const ScheduleView = dynamicImport(() => import('@/components/dashboard/schedule/ScheduleView').then(m => m.ScheduleView), { ssr: false })
 
 function DashboardContent() {
   const { user, isLoading: authLoading } = useAuth()

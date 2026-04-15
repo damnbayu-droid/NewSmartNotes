@@ -1,5 +1,4 @@
 export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
 
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
