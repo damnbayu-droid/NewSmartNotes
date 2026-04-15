@@ -9,24 +9,12 @@ export async function updateSession(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  // Production Guard: Prevent build-time crashes if environment variables are missing
-  // We use valid-formatted placeholders to satisfy @supabase/ssr internal validation
-  if (!supabaseUrl || !supabaseAnonKey) {
-    return createServerClient(
-      'https://hardened-placeholder.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_key',
-      {
-        cookies: {
-          getAll() { return [] },
-          setAll() { }
-        }
-      }
-    )
-  }
+  // Production Guard: Prevent build-time and runtime crashes if environment variables are missing
+  const isPlaceholder = !supabaseUrl || !supabaseAnonKey
 
   const supabase = createServerClient(
-    supabaseUrl,
-    supabaseAnonKey,
+    isPlaceholder ? 'https://hardened-placeholder.supabase.co' : supabaseUrl,
+    isPlaceholder ? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_key' : supabaseAnonKey,
     {
       cookies: {
         getAll() {
@@ -46,7 +34,14 @@ export async function updateSession(request: NextRequest) {
   )
 
   // Do not remove this: core auth refresh logic
-  await supabase.auth.getUser()
+  // Added try/catch and placeholder guard to prevent 500 error on missing secrets
+  if (!isPlaceholder) {
+    try {
+      await supabase.auth.getUser()
+    } catch (error) {
+      console.error('Middleware Auth Error:', error)
+    }
+  }
 
   return supabaseResponse
 }
