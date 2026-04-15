@@ -8,13 +8,18 @@ export async function createClient() {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   // Production Guard: Prevent build-time crashes if environment variables are missing
+  // We use valid-formatted placeholders to satisfy @supabase/ssr internal validation
   if (!supabaseUrl || !supabaseAnonKey) {
-    return createServerClient('', '', {
-      cookies: {
-        getAll() { return [] },
-        setAll() { }
+    return createServerClient(
+      'https://hardened-placeholder.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_key',
+      {
+        cookies: {
+          getAll() { return [] },
+          setAll() { }
+        }
       }
-    })
+    )
   }
 
   return createServerClient(
