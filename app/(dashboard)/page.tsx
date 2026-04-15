@@ -1,6 +1,7 @@
 'use client'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useAuth } from '@/hooks/useAuth'
