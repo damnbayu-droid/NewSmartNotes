@@ -1,10 +1,10 @@
-# Smart Notes Intelligence Suite (v4.2.0-Production)
+# Smart Notes Intelligence Suite (v4.3.0-Production)
 
 A high-fidelity, military-grade knowledge management system. Built for speed, collaboration, and high-density intelligence ingestion. This edition is hardened for **Cloudflare Edge** and **Next.js 16 (Turbopack)**.
 
 ## 🧠 Intelligence Features
 - **Neural Hub Layout**: Persistent sidebar for ultra-fast navigation between Knowledge Clusters.
-- **Next.js 16 Proxy Protocol**: Advanced edge-optimized middleware for session management.
+- **Cloudflare Edge Bridge**: Optimized middleware for session management and request interception.
 - **Resource Ingestion Protocol**: Directly ingest data from **GitHub**, **Google Drive**, and **External URLs**.
 - **Neural Discovery**: Syndicate your intelligence to the global community feed.
 - **Hand-Drawn Logic**: Canvas integration for signatures and visual brainstorming.
@@ -29,7 +29,7 @@ A high-fidelity, military-grade knowledge management system. Built for speed, co
 
 ## 🏗️ Architecture
 - **Framework**: Next.js 16.2.3 (Turbopack)
-- **Runtime**: Experimental-Edge (Cloudflare Verified)
+- **Runtime**: Edge (Cloudflare Verified)
 - **Engine**: React 19
 - **Design System**: Neural Hub (Tailwind 4.0 + Custom Glassmorphism)
 - **Database**: Supabase (PostgreSQL)
