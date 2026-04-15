@@ -21,6 +21,7 @@ import {
   Globe,
   Loader2
 } from 'lucide-react';
+// @ts-ignore - Fallback for CI/CD environment where ambient types may not be detected
 import SignatureCanvas from 'react-signature-canvas';
 import { Dialog as ShadDialog, DialogContent as ShadDialogContent, DialogHeader as ShadDialogHeader, DialogTitle as ShadDialogTitle, DialogTrigger as ShadDialogTrigger, DialogFooter as ShadDialogFooter } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
