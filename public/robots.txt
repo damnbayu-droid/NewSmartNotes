@@ -1,0 +1,48 @@
+# Smart Notes - Robots.txt
+# https://notes.biz.id
+
+User-agent: *
+Allow: /
+
+# --- Disallow private/dynamic routes ---
+Disallow: /api/
+Disallow: /auth/
+Disallow: /admin/
+Disallow: /.well-known/
+Disallow: /share/          # Legacy share links (uses raw UUID, low SEO value)
+
+# --- Allow short share links for indexing ---
+Allow: /s/
+Allow: /discovery
+Allow: /privacy
+Allow: /term
+
+# --- Specific bot rules (AI Agents & Search Engines) ---
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 0
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Sitemaps
+Sitemap: https://notes.biz.id/sitemap.xml
