@@ -12,14 +12,26 @@ This guide contains the exact settings required to deploy the **Hardened Smart N
 | **Compatibility Date** | `2024-04-01` (or newer) |
 | **Compatibility Flags** | `nodejs_compat` |
 
-## 🔑 Environment Variables
+## 🏗️ Architecture
+- **Framework**: Next.js 16.2.3 (Turbopack)
+- **Runtime**: Edge (Cloudflare Verified)
+- **Rendering**: Dynamic (Forced for Dashboard/Login)
 
-Ensure the following variables are set in the Cloudflare Pages Dashboard (**Settings > Functions > Variables**):
+## 🔑 Environment Variables & Secrets
 
-*   `NEXT_PUBLIC_SUPABASE_URL`
-*   `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-*   `NEXT_PUBLIC_APP_URL` (Set to your custom domain or Pages URL)
-*   `SERVICE_ROLE_KEY` (Required for admin functions)
+### 1. Build Phase (Optional but Recommended)
+For static generation features, you can add variables to your `wrangler.toml` or the Cloudflare Dashboard under **Settings > Build & Deploy > Environment Variables**.
+
+### 2. Runtime Phase (CRITICAL)
+Your Supabase client requires secrets to function live. You MUST set these in the Cloudflare Dashboard:
+1.  Go to **Workers & Pages** > Your Project.
+2.  Navigate to **Settings > Functions**.
+3.  Scroll to **Environment Variables (Production)**.
+4.  Add:
+    - `NEXT_PUBLIC_SUPABASE_URL`
+    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+    - `SERVICE_ROLE_KEY`
+5.  **Re-deploy** to apply the secrets.
 
 ## 🏗️ Deployment Troubleshooting
 
