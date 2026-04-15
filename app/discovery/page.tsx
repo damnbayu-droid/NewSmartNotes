@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { Metadata } from 'next'
 
-export const runtime = 'experimental-edge'
+export const runtime = 'edge'
 import { Compass, Sparkles, Search, Star, Clock, ArrowUpRight, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import Script from 'next/script'

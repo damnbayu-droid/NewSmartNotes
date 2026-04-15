@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 
-export const runtime = 'experimental-edge'
+export const runtime = 'edge'
 import { sanitizeHtml } from '@/lib/sanitization'
 import { Metadata } from 'next'
 import { Globe, Calendar, Sparkles, User, Badge as BadgeIcon } from 'lucide-react'
